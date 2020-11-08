@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. 开始第一个Spring Boot应用程序</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Spring Boot 概览" href="di.html" />
+    <link rel="prev" title="1. Spring Boot 2.x 教学计划" href="plan.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> springboot
+          
+
+          
+            
+            <img src="../_static/icon-Spring-Cloud.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="plan.html">1. Spring Boot 2.x 教学计划</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 开始第一个Spring Boot应用程序</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2.1. Spring Boot 概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spring-boot-cli">2.2. Spring Boot CLI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.2.1. 安装Spring Boot CLI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mac">2.2.1.1. Mac上安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">2.2.1.2. 其他系统上安装</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cli">2.2.2. 开始使用CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.2.3. 使用CLI初始化项目</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hello-world">2.3. 创建一个 Hello World 应用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.3.1. 环境准备</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.3.2. 在线界面初始化项目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pom-xml">2.3.3. pom.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code">2.3.4. 添加Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.3.5. 运行程序</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ide">2.3.5.1. IDE中执行</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mvn">2.3.5.2. mvn执行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#maven-gradle">2.4. 对比 Maven 和 Gradle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#maven">2.4.1. Maven</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gradle">2.4.2. Gradle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ide-support">2.5. IDE Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.6. Spring boot 的自动配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">2.7. 打包 Spring Boot 应用程序</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">2.7.1. Maven 工程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">2.7.2. Gradle 工程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">2.8. 运行及部署 Spring Boot 应用程序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">2.9. 参考</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="di.html">3. Spring Boot 概览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="restful.html">4. Spring Boot 和 RESTful 服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">5. 开发Spring Boot应用程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="springdata.html">6. Spring Data and Spring Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internal.html">7. Spring Boot Internals and Defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">8. Security with Spring Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator.html">9. Spring Boot Actuator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">10. 部署Spring Boot应用</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">springboot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">首页</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>开始第一个Spring Boot应用程序</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spring-boot">
+<h1><span class="section-number">2. </span>开始第一个Spring Boot应用程序<a class="headerlink" href="#spring-boot" title="Permalink to this headline">¶</a></h1>
+<p>Spring Boot 是由 Pivotal 团队提供用来简化 Spring 的搭建和开发过程的全新框架。随着近些年来微服务技术的流行，Spring Boot 也成了时下炙手可热的热点技术。</p>
+<p>Spring Boot 去除了大量的 xml 配置文件，简化了复杂的依赖管理，配合各种 starter 使用，基本上可以做到自动化配置。Spring 可以做的事情，现在用 Spring boot 都可以做。</p>
+<p>这套 Spring Boot 框架快速入门教程以大量示例讲解了 Spring Boot 在各类情境中的应用，让读者可以跟着笔者的思维和代码快速理解并掌握。适用于 Java 开发人员，尤其是初学 Spring Boot 的人员和需要从传统 Spring 转向 Spring Boot 开发的技术人员。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">2.1. </span>Spring Boot 概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>创建独立的Spring应用程序</p></li>
+<li><p>直接嵌入Tomcat，Jetty或Undertow（无需部署WAR文件）</p></li>
+<li><p>提供集成的“starter”依赖项，以简化构建配置</p></li>
+<li><p>尽可能自动配置Spring和3rd Party库</p></li>
+<li><p>提供生产就绪的功能，例如指标，运行状况检查和外部配置</p></li>
+<li><p>完全没有代码生成，也不需要XML配置（最低配置或零配置）</p></li>
+<li><p>约定大于配置（Convention Over Configuration）</p></li>
+</ul>
+</div>
+<div class="section" id="spring-boot-cli">
+<h2><span class="section-number">2.2. </span>Spring Boot CLI<a class="headerlink" href="#spring-boot-cli" title="Permalink to this headline">¶</a></h2>
+<p>Spring Boot CLI是一个命令行工具，使用它可以快速开发Spring应用。Spring Boot CLI基于运行Groovy脚本，Groovy是一个类似Java的语法的语言。我们也可以基于Spring Boot CLI编写自己的命令。</p>
+<div class="section" id="id2">
+<h3><span class="section-number">2.2.1. </span>安装Spring Boot CLI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mac">
+<h4><span class="section-number">2.2.1.1. </span>Mac上安装<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h4>
+<p>推荐Manual Installation方式安装。</p>
+<ol class="arabic">
+<li><p>下载 <a class="reference external" href="https://repo.spring.io/release/org/springframework/boot/spring-boot-cli/2.3.3.RELEASE/spring-boot-cli-2.3.3.RELEASE-bin.zip">spring-boot-cli-2.3.3.RELEASE-bin.zip</a> 文件</p></li>
+<li><p>解压文件到任何目录</p></li>
+<li><p>创建软链接，如:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">tool</span><span class="o">/</span><span class="n">spring</span><span class="o">-</span><span class="mf">2.3</span><span class="o">.</span><span class="mf">3.</span><span class="n">RELEASE</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">spring</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">spring</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h4><span class="section-number">2.2.1.2. </span>其他系统上安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>参照连接：
+<a class="reference external" href="https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started-installing-the-cli">https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started-installing-the-cli</a></p>
+</div>
+</div>
+<div class="section" id="cli">
+<h3><span class="section-number">2.2.2. </span>开始使用CLI<a class="headerlink" href="#cli" title="Permalink to this headline">¶</a></h3>
+<p>验证安装是否成功，运行命令：</p>
+<blockquote>
+<div><div class="highlight-sh notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ spring --version
+Spring CLI v2.3.3.RELEASE
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>下面通过一个示例，快速的使用CLI。</p>
+<ol class="arabic">
+<li><p>创建文件 app.groovy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@RestController</span>
+<span class="k">class</span> <span class="nc">ThisWillActuallyRun</span> <span class="p">{</span>
+
+    <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="n">String</span> <span class="n">home</span><span class="p">()</span> <span class="p">{</span>
+        <span class="s2">&quot;Hello World!&quot;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>然后从CLI运行它，如下所示:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spring</span> <span class="n">run</span> <span class="n">app</span><span class="o">.</span><span class="n">groovy</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>在浏览器中打开 <a class="reference external" href="http://localhost:8080">http://localhost:8080</a> 。应该会看到输出”Hello World!”。</p>
+</div>
+<div class="section" id="id4">
+<h3><span class="section-number">2.2.3. </span>使用CLI初始化项目<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ spring init --dependencies=web,data-jpa my-project
+Using service at https://start.spring.io
+Project extracted to &#39;/Users/developer/example/my-project&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hello-world">
+<h2><span class="section-number">2.3. </span>创建一个 Hello World 应用<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3><span class="section-number">2.3.1. </span>环境准备<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>确保本地安装了有效的Java和Maven版本:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ java -version
+java version &quot;1.8.0_102&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
+
+$ mvn -v
+Apache Maven 3.5.4 (1edded0938998edf8bf061f1ceb3cfdeccf443fe; 2018-06-17T14:33:14-04:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_102, vendor: Oracle Corporation
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">2.3.2. </span>在线界面初始化项目<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://start.spring.io/">https://start.spring.io/</a></p>
+</div>
+<div class="section" id="pom-xml">
+<h3><span class="section-number">2.3.3. </span>pom.xml<a class="headerlink" href="#pom-xml" title="Permalink to this headline">¶</a></h3>
+<p>Spring Boot提供了许多 “Starters（启动程序）”，目的是可以将jar添加到classpath中。spring-boot-starter-parent是一个特殊的启动程序，它除了提供了Maven的默认值外，还提供了依赖管理，这样就可以省略依赖的版本标签。</p>
+<p>&lt;relativePath&gt; 标签的作用是设置依赖查找的顺序，默认路径为：relativePath元素中的地址-&gt;本地仓库–&gt;远程仓库。当设置为空时，即：&lt;relativePath/&gt; 表示依赖不从该元素中的地址（本地路径）获取，直接从仓库（本地仓库–&gt;远程仓库）获取。</p>
+<p>其他 “Starters”提供了开发特定类型应用时可能需要的依赖关系。由于我们要开发的是一个Web应用，所以我们添加一个spring-boot-starter-web依赖：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+</div>
+<p>我们可以通过运行下面的命令来查看当前应用依赖的Jar包及其依赖关系:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mvn</span> <span class="n">dependency</span><span class="p">:</span><span class="n">tree</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">dependency:tree</span></code> 命令打印项目依赖关系树信息。</p>
+</div>
+<div class="section" id="code">
+<h3><span class="section-number">2.3.4. </span>添加Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<p>打开 Application.java 类，添加一个方法和一个annotation（代码高亮部分）:</p>
+<div class="highlight-java notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.example.demo</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="p">;</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="nd">@RestController</span>
+</span><span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoApplication</span> <span class="p">{</span>
+
+<span class="hll">    <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">String</span> <span class="nf">home</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">        <span class="k">return</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+</span><span class="hll">    <span class="p">}</span>
+</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">DemoApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ol class="arabic simple">
+<li><p>&#64;RestController 这个注解提供了处理传入的Web请求和返回JSON响应。</p></li>
+<li><p>&#64;RequestMapping 这个注解提供路由设置。</p></li>
+<li><p>main方法 这只是遵循Java约定的应用程序入口点的标准方法。 我们的main方法通过调用run委托给Spring Boot的SpringApplication类。 SpringApplication会引导我们的应用程序，并启动Spring，后者反过来又会启动自动配置的Tomcat Web服务器。</p></li>
+</ol>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">2.3.5. </span>运行程序<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>介绍2种方式运行程序。</p>
+<div class="section" id="ide">
+<h4><span class="section-number">2.3.5.1. </span>IDE中执行<a class="headerlink" href="#ide" title="Permalink to this headline">¶</a></h4>
+<p>导入到Eclipse中，然后直接运行DemoApplication类中的main方法。</p>
+</div>
+<div class="section" id="mvn">
+<h4><span class="section-number">2.3.5.2. </span>mvn执行<a class="headerlink" href="#mvn" title="Permalink to this headline">¶</a></h4>
+<p>在POM文件种，程序依赖了spring-boot-starter-parent, 用它来启动应用程序:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mvn</span> <span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="p">:</span><span class="n">run</span>
+</pre></div>
+</div>
+<p>打开浏览器，访问 <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>, 将会看到下面的输出:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="maven-gradle">
+<h2><span class="section-number">2.4. </span>对比 Maven 和 Gradle<a class="headerlink" href="#maven-gradle" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="maven">
+<h3><span class="section-number">2.4.1. </span>Maven<a class="headerlink" href="#maven" title="Permalink to this headline">¶</a></h3>
+<p>Maven的核心可以说是一个Plugin（插件）执行框架，因为所有的工作都是由Plugin来完成的。Maven支持广泛的可用Plugin，而且每个Plugin都可以额外配置。</p>
+<p>其中一个可用的插件是Apache Maven Dependency Plugin，它有一个copy-dependencies（复制-依赖）的goal（目标），将项目的依赖复制到指定的目录。
+为了展示这个插件的作用，我们在pom.xml文件中加入这个插件，并为项目的依赖关系配置一个输出目录。</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>copy-dependencies<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>copy-dependencies<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;outputDirectory&gt;</span>target/dependencies
+                <span class="nt">&lt;/outputDirectory&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>这个插件将在“package”阶段执行，所以如果我们运行命令:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mvn</span> <span class="n">package</span>
+</pre></div>
+</div>
+<p>package将执行这个插件，并将依赖项复制到“target/dependencies”文件夹中。</p>
+<p>Maven变得非常流行，因为现在构建文件已经标准化了，相比Ant，维护构建文件的时间大大减少。不过，虽然比Ant文件更标准化，但Maven的配置文件还是容易变得很大很繁琐。</p>
+<p>Maven的严格约定的代价是灵活性比Ant差很多。目标自定义非常难，所以写自定义的构建脚本相比Ant来说，难度要大很多。</p>
+<p>虽然Maven在让应用的构建过程变得更简单、更标准化方面做了一些严重的改进，但由于比Ant少了很多灵活性，它仍然是有代价的。这就导致了Gradle的诞生，它结合了Ant的灵活性和Maven的功能。</p>
+<p>Gradle是一个依赖性管理和构建自动化工具，它是建立在Ant和Maven的概念上的。</p>
+<p>关于Gradle，它使用的是基于Groovy或Kotlin的一门DSL（Domain-Specific Language）语言，因为该语言是专门为解决特定领域问题而设计的。Gradle不像Ant或Maven，不使用XML文件。Gradle的配置文件在Groovy中约定俗成地称为build.gradle，在Kotlin中称为build.gradle.kts。</p>
+</div>
+<div class="section" id="gradle">
+<h3><span class="section-number">2.4.2. </span>Gradle<a class="headerlink" href="#gradle" title="Permalink to this headline">¶</a></h3>
+<p>下面通过在线界面初始化一个Gradle项目，其build.gradle内容如下：</p>
+<div class="highlight-groovy notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s1">&#39;org.springframework.boot&#39;</span> <span class="n">version</span> <span class="s1">&#39;2.3.3.RELEASE&#39;</span>
+    <span class="n">id</span> <span class="s1">&#39;io.spring.dependency-management&#39;</span> <span class="n">version</span> <span class="s1">&#39;1.0.10.RELEASE&#39;</span>
+    <span class="n">id</span> <span class="s1">&#39;java&#39;</span>
+<span class="o">}</span>
+
+<span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;com.example&#39;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;0.0.1-SNAPSHOT&#39;</span>
+<span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="s1">&#39;8&#39;</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">implementation</span> <span class="s1">&#39;org.springframework.boot:spring-boot-starter-web&#39;</span>
+    <span class="n">testImplementation</span><span class="o">(</span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-test&#39;</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">&#39;org.junit.vintage&#39;</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">&#39;junit-vintage-engine&#39;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">test</span> <span class="o">{</span>
+    <span class="n">useJUnitPlatform</span><span class="o">()</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>我们可以通过运行下面的命令对项目进行编译:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gradle</span> <span class="n">classes</span>
+</pre></div>
+</div>
+<p>Gradle的配置文件看上去显然比Maven要少很多。在上面的Maven项目示例中，我们使用Apache Maven Dependency Plugin 将依赖关系复制到指定的目录中，下面我们在Gradle中实现同样的功能。</p>
+<p>Gradle给它的构建步骤命名为 “tasks（任务）”，而不是Ant的 “targets(目标) “或Maven的 “phases(阶段)”。在Gradle中，我们可以通过使用task任务来实现同样的目标。</p>
+<div class="highlight-groovy notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="nf">copyDependencies</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">from</span> <span class="n">configurations</span><span class="o">.</span><span class="na">default</span>
+    <span class="n">into</span> <span class="s1">&#39;dependencies&#39;</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>接着，我们执行下面的命令：</p>
+<div class="highlight-sh notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ gradle copyDependencies
+Starting a Gradle Daemon, <span class="m">1</span> incompatible and <span class="m">1</span> stopped Daemons could not be reused, use --status <span class="k">for</span> details
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle <span class="m">7</span>.0.
+Use <span class="s1">&#39;--warning-mode all&#39;</span> to show the individual deprecation warnings.
+See https://docs.gradle.org/6.6.1/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 8s
+</pre></div>
+</td></tr></table></div>
+<p>上述命令执行完成后，将会在项目的根目录下自动生成了一个“dependencies”命名的文件名，里面包含了项目的全部依赖包。</p>
+</div>
+</div>
+<div class="section" id="ide-support">
+<h2><span class="section-number">2.5. </span>IDE Support<a class="headerlink" href="#ide-support" title="Permalink to this headline">¶</a></h2>
+<p>常规的IDE有：Eclipse, STS 和 IntelliJ，下面示图显示的是导入Gradle或者Maven项目到Eclipse中的选项面板。</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/import.png"><img alt="../_images/import.png" src="../_images/import.png" style="width: 600px;" /></a>
+</div></blockquote>
+</div>
+<div class="section" id="id8">
+<h2><span class="section-number">2.6. </span>Spring boot 的自动配置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>Spring Boot 自动配置会尝试根据添加的 jar 依赖项，自动配置 Spring 应用程序。例如，如果HSQLDB（一个嵌入式内存数据库）在 Classpath 上，并且项目尚未手动配置任何数据库连接 bean，那么 Spring Boot 会自动配置内存数据库。</p>
+<p>用户需要通过向&#64;Configuration类上添加&#64;EnableAutoConfiguration或&#64;SpringBootApplication 标签来选择自动配置。</p>
+<p>自动配置是非侵入性的。在任何时候，用户都可以开始定义自己的配置，以替换自动配置的特定部分。例如，如果用户添加自己的DataSource bean，则默认的嵌入式数据库支持将退出。</p>
+</div>
+<div class="section" id="id9">
+<h2><span class="section-number">2.7. </span>打包 Spring Boot 应用程序<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3><span class="section-number">2.7.1. </span>Maven 工程<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>mvn package</p>
+</div>
+<div class="section" id="id11">
+<h3><span class="section-number">2.7.2. </span>Gradle 工程<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>gradle build</p>
+</div>
+</div>
+<div class="section" id="id12">
+<h2><span class="section-number">2.8. </span>运行及部署 Spring Boot 应用程序<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>上述通过打包 Spring Boot 应用程序后，将创建可执行（Executable）Jar包。可执行Jar包可以在生产环境中完全独立的运行。
+可执行jar（有时称为“fat jar”）是包含已编译类以及代码需要运行的所有jar依赖项的归档文件。</p>
+<p>mvn package 命令在目标目录下生成了一个类似名为“demo-0.0.1-SNAPSHOT.jar”的文件。这个文件的大小应该在10MB左右。如果查看Jar包里面的内容，可以使用如下命令:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jar</span> <span class="n">tvf</span> <span class="n">target</span><span class="o">/</span><span class="n">demo</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="o">.</span><span class="n">jar</span>
+</pre></div>
+</div>
+<p>执行上述命令后，在目录下看到一个小得多的文件，名为 demo-0.0.1-SNAPSHOT.jar.original。这是Maven在被Spring Boot重新打包之前创建的原始jar文件。</p>
+<p>要运行该应用程序，请使用java -jar命令，如下所示:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">target</span><span class="o">/</span><span class="n">demo</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="o">.</span><span class="n">jar</span>
+</pre></div>
+</div>
+<p>可以通过快捷键停止应用： Ctrl + c 。</p>
+<p>上述命令，一旦关闭命令框，程序将会终止，这时可以使用如下命令:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nohup</span> <span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">your_app</span><span class="o">.</span><span class="n">jar</span> <span class="o">--</span><span class="n">server</span><span class="o">.</span><span class="n">port</span><span class="o">=</span><span class="mi">8888</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+<p>通过nohup 和 &amp; 组合，将命令转向后台，这时关闭命令框，程序将不受影响，依然持续运行。</p>
+</div>
+<div class="section" id="id13">
+<h2><span class="section-number">2.9. </span>参考<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>中文：<a class="reference external" href="https://www.docs4dev.com/docs/zh/spring-boot/2.1.1.RELEASE/reference">https://www.docs4dev.com/docs/zh/spring-boot/2.1.1.RELEASE/reference</a></p></li>
+<li><p>英文：<a class="reference external" href="https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started">https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started</a></p></li>
+<li><p><a class="reference external" href="https://www.tutorialspoint.com/spring_boot/index.htm">https://www.tutorialspoint.com/spring_boot/index.htm</a></p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="di.html" class="btn btn-neutral float-right" title="3. Spring Boot 概览" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plan.html" class="btn btn-neutral float-left" title="1. Spring Boot 2.x 教学计划" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Murphy
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

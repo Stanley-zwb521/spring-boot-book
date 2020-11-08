@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9. Spring Boot Actuator</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10. 部署Spring Boot应用" href="deploy.html" />
+    <link rel="prev" title="8. Security with Spring Boot" href="security.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> springboot
+          
+
+          
+            
+            <img src="../_static/icon-Spring-Cloud.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="plan.html">1. Spring Boot 2.x 教学计划</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first.html">2. 开始第一个Spring Boot应用程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="di.html">3. Spring Boot 概览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="restful.html">4. Spring Boot 和 RESTful 服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">5. 开发Spring Boot应用程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="springdata.html">6. Spring Data and Spring Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internal.html">7. Spring Boot Internals and Defaults</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">8. Security with Spring Boot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Spring Boot Actuator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#spring-boot-actuator-module">9.1. Spring Boot Actuator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actuator-end-points">9.2. Actuator End Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-the-endpoint-id">9.3. Changing the Endpoint ID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actuator-cors-support">9.4. Actuator CORS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-the-management-endpoints-path">9.5. Changing the Management Endpoints Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#securing-endpoints">9.6. Securing Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-custom-actuator-endpoints">9.7. Implementing Custom Actuator Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spring-boot-actuator-health">9.8. Spring Boot Actuator health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spring-boot-actuator-metrics">9.9. Spring Boot Actuator metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">10. 部署Spring Boot应用</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">springboot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">首页</a> &raquo;</li>
+        
+      <li><span class="section-number">9. </span>Spring Boot Actuator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spring-boot-actuator">
+<h1><span class="section-number">9. </span>Spring Boot Actuator<a class="headerlink" href="#spring-boot-actuator" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="spring-boot-actuator-module">
+<h2><span class="section-number">9.1. </span>Spring Boot Actuator Module<a class="headerlink" href="#spring-boot-actuator-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="actuator-end-points">
+<h2><span class="section-number">9.2. </span>Actuator End Points<a class="headerlink" href="#actuator-end-points" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="changing-the-endpoint-id">
+<h2><span class="section-number">9.3. </span>Changing the Endpoint ID<a class="headerlink" href="#changing-the-endpoint-id" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="actuator-cors-support">
+<h2><span class="section-number">9.4. </span>Actuator CORS support<a class="headerlink" href="#actuator-cors-support" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="changing-the-management-endpoints-path">
+<h2><span class="section-number">9.5. </span>Changing the Management Endpoints Path<a class="headerlink" href="#changing-the-management-endpoints-path" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="securing-endpoints">
+<h2><span class="section-number">9.6. </span>Securing Endpoints<a class="headerlink" href="#securing-endpoints" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="implementing-custom-actuator-endpoints">
+<h2><span class="section-number">9.7. </span>Implementing Custom Actuator Endpoints<a class="headerlink" href="#implementing-custom-actuator-endpoints" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="spring-boot-actuator-health">
+<h2><span class="section-number">9.8. </span>Spring Boot Actuator health<a class="headerlink" href="#spring-boot-actuator-health" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="spring-boot-actuator-metrics">
+<h2><span class="section-number">9.9. </span>Spring Boot Actuator metrics<a class="headerlink" href="#spring-boot-actuator-metrics" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deploy.html" class="btn btn-neutral float-right" title="10. 部署Spring Boot应用" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="security.html" class="btn btn-neutral float-left" title="8. Security with Spring Boot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Murphy
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+.wy-nav-content{
+    max-width: 100%
+}
+.wy-side-nav-search {
+    background-color:#FF5722
+}
+.wy-nav-top{
+    background:#FF5722
+}
+.wy-nav-side{
+    background:#455a64;
+    color: #ffee58
+}
+.wy-menu-vertical header, .wy-menu-vertical p.caption{
+    color: #FFEB3B;
+}
+
+.wy-nav-side .ethical-rtd{
+    display: none;
+}
+
+.wy-side-nav-search>a, .wy-side-nav-search .wy-dropdown>a{
+    color: yellow;
+}
+
+.wy-side-nav-search>a.icon img.logo, .wy-side-nav-search .wy-dropdown>a.icon img.logo{
+    margin-top:0
+}
+
+.wy-side-nav-search>a img.logo, .wy-side-nav-search .wy-dropdown>a img.logo{
+    width:45%
+}

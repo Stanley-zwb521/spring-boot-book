@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7. Spring Boot Internals and Defaults</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. Security with Spring Boot" href="security.html" />
+    <link rel="prev" title="6. Spring Data and Spring Boot" href="springdata.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> springboot
+          
+
+          
+            
+            <img src="../_static/icon-Spring-Cloud.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="plan.html">1. Spring Boot 2.x 教学计划</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first.html">2. 开始第一个Spring Boot应用程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="di.html">3. Spring Boot 概览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="restful.html">4. Spring Boot 和 RESTful 服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mvc.html">5. 开发Spring Boot应用程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="springdata.html">6. Spring Data and Spring Boot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Spring Boot Internals and Defaults</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#springapplication-class">7.1. SpringApplication class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-banner-configuration">7.2. Custom Banner configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#springapplication-builder">7.3. SpringApplication Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applicationrunner-and-commandlinerunner-configuration">7.4. ApplicationRunner and CommandLineRunner configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-properties-prefix">7.5. Custom Properties Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-spring-boot-starter-project">7.6. Creating a Spring Boot Starter project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">8. Security with Spring Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator.html">9. Spring Boot Actuator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">10. 部署Spring Boot应用</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">springboot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">首页</a> &raquo;</li>
+        
+      <li><span class="section-number">7. </span>Spring Boot Internals and Defaults</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spring-boot-internals-and-defaults">
+<h1><span class="section-number">7. </span>Spring Boot Internals and Defaults<a class="headerlink" href="#spring-boot-internals-and-defaults" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="springapplication-class">
+<h2><span class="section-number">7.1. </span>SpringApplication class<a class="headerlink" href="#springapplication-class" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="custom-banner-configuration">
+<h2><span class="section-number">7.2. </span>Custom Banner configuration<a class="headerlink" href="#custom-banner-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                  _oo0oo_
+                 o8888888o
+                 88&quot; . &quot;88
+                 (| -_- |)
+                 0\  =  /0
+               ___/`---&#39;\___
+             .&#39; \\|     |// &#39;.
+            / \\|||  :  |||// \
+           / _||||| -:- |||||_ \
+          |   | \\\  -  /// |   |
+          | \_|  &#39;&#39;\---/&#39;&#39;  |_/ |
+          \  .-\__  &#39;-&#39;  __/-.  /
+        ___&#39;. .&#39;  /--.--\  &#39;. .&#39;___
+     .&quot;&quot; &#39;&lt;  `.___\_&lt;|&gt;_/___.&#39;  &gt;&#39; &quot;&quot;.
+    | | :  `- \`.;`\ _ /`;.`/ -`  : | |
+    \  \ `_.   \_ __\ /__ _/   ._` /  /
+=====`-.____`.___ \_____/ ___.`____.-`=====
+                  `=---=`
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        _.._        .--------------------.
+     /       `.    ( what are you! )
+    /  __) __  \    .--------------------.
+   (  (`-`(-)   ) _.-
+   /)  \  = /  (
+  /     |--  .  \
+ (  ,---|  `-.)__`
+  )(  `-.,--    _`-.
+  /,           (  Uu&quot;,
+  (_       ,    `/,-  )
+  `.__,  : `- /  /`--
+    |      --   |
+    \   `-._   /
+     \        (
+     /\ .      \.  docedit.cn
+    / |` \     ,-\
+   /  \| .)   /   \
+  ( , |\    ,      :
+  | \,`.`--&quot;/      }
+  `,     \  |,     /
+ / &quot;-._   `-/      |
+ &quot;-.   &quot;-., |      ;
+ /       _/[&quot;--- &quot;&quot;]
+:       /  |&quot;-     |
+:          |      /
+           `     |
+</pre></div>
+</div>
+</div>
+<div class="section" id="springapplication-builder">
+<h2><span class="section-number">7.3. </span>SpringApplication Builder<a class="headerlink" href="#springapplication-builder" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="applicationrunner-and-commandlinerunner-configuration">
+<h2><span class="section-number">7.4. </span>ApplicationRunner and CommandLineRunner configuration<a class="headerlink" href="#applicationrunner-and-commandlinerunner-configuration" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="custom-properties-prefix">
+<h2><span class="section-number">7.5. </span>Custom Properties Prefix<a class="headerlink" href="#custom-properties-prefix" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="creating-a-spring-boot-starter-project">
+<h2><span class="section-number">7.6. </span>Creating a Spring Boot Starter project<a class="headerlink" href="#creating-a-spring-boot-starter-project" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="security.html" class="btn btn-neutral float-right" title="8. Security with Spring Boot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="springdata.html" class="btn btn-neutral float-left" title="6. Spring Data and Spring Boot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Murphy
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
